@@ -1,0 +1,15 @@
+.navbar-color {
+    background-color: rgb(211, 108, 117);
+}
+
+.navbar-text {
+    color: white;
+}
+
+.navbar-text:hover {
+    color: lightgray;
+}
+
+.line-break {
+    text-align: left;
+}
