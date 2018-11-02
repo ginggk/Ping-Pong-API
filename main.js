@@ -70,8 +70,10 @@ function onSignIn(pageData) {
             return response.json();
         })
         .then(function(newJson) {
+            pageData.username = username;
             pageData.token = newJson.token;
             getUsers(pageData);
+            showHome(pageData);
         });
 }
 
@@ -92,8 +94,10 @@ function onLogin(pageData) {
             return response.json();
         })
         .then(function(newJson) {
+            pageData.username = username;
             pageData.token = newJson.token;
             getUsers(pageData);
+            showHome(pageData);
         });
 }
 
@@ -110,4 +114,16 @@ function getUsers(pageData) {
         .then(function(newJson) {
             console.log(newJson);
         });
+}
+
+function showHome(pageData) {
+    var source = document.getElementById("showHome").innerHTML;
+    var template = Handlebars.compile(source);
+    content = template({
+        welcomeUserMessage: `Welcome ${pageData.username}!`,
+        buttonMessage: "Start A New Game",
+        leaderBoardPlacement: "This is where the leaderboard goes!"
+    });
+    var place = document.querySelector("#script-placement");
+    place.innerHTML = content;
 }
