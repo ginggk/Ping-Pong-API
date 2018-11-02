@@ -1,19 +1,3 @@
-function listenForHome() {
-    var homeLink = document.querySelector("#HomeLink");
-    homeLink.addEventListener("click", showHomePage);
-}
-listenForHome();
-
-function showHomePage() {
-    var source = document.getElementById("showHomePage").innerHTML;
-    var template = Handlebars.compile(source);
-    content = template({
-        emptyMessage: "Empty holder for when we put stuff here."
-    });
-    var place = document.querySelector("#script-placement");
-    place.innerHTML = content;
-}
-
 function listenForSignUp() {
     var signUpLink = document.querySelector("#SignUpLink");
     signUpLink.addEventListener("click", showSignUpPage);
@@ -31,6 +15,11 @@ function showSignUpPage() {
     });
     var place = document.querySelector("#script-placement");
     place.innerHTML = content;
+    button = document.querySelector("#signupButton");
+    button.addEventListener("click", function(event) {
+        event.preventDefault();
+        onSignIn();
+    });
 }
 
 function listenForLogin() {
@@ -51,9 +40,25 @@ function showLoginPage() {
     place.innerHTML = content;
 }
 
-function listenForBrand() {
-    var brand = document.getElementById("brandName");
-    brand.addEventListener("click", showHomePage);
+function onSignIn() {
+    username = document.querySelector("#inputUsername").value;
+    password = document.querySelector("#inputPassword").value;
+    passwordRepeat = document.querySelector("#inputPasswordRepeat").value;
+    fetch(`http://bcca-pingpong.herokuapp.com/api/register/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json, charset=utf8"
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password,
+            password_repeat: passwordRepeat
+        })
+    })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(newJson) {
+            console.log(newJson);
+        });
 }
-
-listenForBrand();

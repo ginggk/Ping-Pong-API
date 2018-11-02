@@ -2,14 +2,30 @@
     background-color: rgb(211, 108, 117);
 }
 
-.navbar-text {
-    color: white;
+.formLink {
+    color: blue;
+    text-decoration: none;
 }
 
-.navbar-text:hover {
-    color: lightgray;
+.formLink:hover {
+    color: rgb(115, 115, 250);
+    text-decoration: none;
 }
 
 .line-break {
     text-align: left;
+}
+
+.card-color {
+    background-color: rgb(211, 108, 117);
+    color: white;
+}
+
+.color-button {
+    background-color: rgb(211, 108, 117);
+    color: white;
+}
+
+.fancy-font {
+    font-family: "Righteous", cursive;
 }
