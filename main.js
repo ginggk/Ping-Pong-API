@@ -38,6 +38,11 @@ function showLoginPage() {
     });
     var place = document.querySelector("#script-placement");
     place.innerHTML = content;
+    button = document.querySelector("#loginButton");
+    button.addEventListener("click", function(event) {
+        event.preventDefault();
+        onLogin();
+    });
 }
 
 function onSignIn() {
@@ -47,12 +52,33 @@ function onSignIn() {
     fetch(`http://bcca-pingpong.herokuapp.com/api/register/`, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json, charset=utf8"
+            "Content-Type": "application/json; charset=utf8"
         },
         body: JSON.stringify({
             username: username,
             password: password,
             password_repeat: passwordRepeat
+        })
+    })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(newJson) {
+            console.log(newJson);
+        });
+}
+
+function onLogin() {
+    username = document.querySelector("#existingUsername").value;
+    password = document.querySelector("#existingPassword").value;
+    fetch(`http://bcca-pingpong.herokuapp.com/api/login/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json; charset=utf8"
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password
         })
     })
         .then(function(response) {
