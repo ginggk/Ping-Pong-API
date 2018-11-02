@@ -1,10 +1,14 @@
-function listenForSignUp() {
-    var signUpLink = document.querySelector("#SignUpLink");
-    signUpLink.addEventListener("click", showSignUpPage);
-}
-listenForSignUp();
+var pageData = {};
 
-function showSignUpPage() {
+function listenForSignUp(pageData) {
+    var signUpLink = document.querySelector("#SignUpLink");
+    signUpLink.addEventListener("click", function() {
+        showSignUpPage(pageData);
+    });
+}
+listenForSignUp(pageData);
+
+function showSignUpPage(pageData) {
     var source = document.getElementById("showSignUp").innerHTML;
     var template = Handlebars.compile(source);
     content = template({
@@ -18,17 +22,19 @@ function showSignUpPage() {
     button = document.querySelector("#signupButton");
     button.addEventListener("click", function(event) {
         event.preventDefault();
-        onSignIn();
+        onSignIn(pageData);
     });
 }
 
-function listenForLogin() {
+function listenForLogin(pageData) {
     var loginLink = document.querySelector("#LoginLink");
-    loginLink.addEventListener("click", showLoginPage);
+    loginLink.addEventListener("click", function() {
+        showLoginPage(pageData);
+    });
 }
-listenForLogin();
+listenForLogin(pageData);
 
-function showLoginPage() {
+function showLoginPage(pageData) {
     var source = document.getElementById("showLogin").innerHTML;
     var template = Handlebars.compile(source);
     content = template({
@@ -41,11 +47,11 @@ function showLoginPage() {
     button = document.querySelector("#loginButton");
     button.addEventListener("click", function(event) {
         event.preventDefault();
-        onLogin();
+        onLogin(pageData);
     });
 }
 
-function onSignIn() {
+function onSignIn(pageData) {
     username = document.querySelector("#inputUsername").value;
     password = document.querySelector("#inputPassword").value;
     passwordRepeat = document.querySelector("#inputPasswordRepeat").value;
@@ -64,11 +70,12 @@ function onSignIn() {
             return response.json();
         })
         .then(function(newJson) {
-            console.log(newJson);
+            pageData.token = newJson.token;
+            getUsers(pageData);
         });
 }
 
-function onLogin() {
+function onLogin(pageData) {
     username = document.querySelector("#existingUsername").value;
     password = document.querySelector("#existingPassword").value;
     fetch(`http://bcca-pingpong.herokuapp.com/api/login/`, {
@@ -80,6 +87,22 @@ function onLogin() {
             username: username,
             password: password
         })
+    })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(newJson) {
+            pageData.token = newJson.token;
+            getUsers(pageData);
+        });
+}
+
+function getUsers(pageData) {
+    fetch("https://bcca-pingpong.herokuapp.com/api/users/", {
+        method: "GET",
+        headers: {
+            Authorization: `Token ${pageData.token}`
+        }
     })
         .then(function(response) {
             return response.json();
