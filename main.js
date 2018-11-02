@@ -126,4 +126,49 @@ function showHome(pageData) {
     });
     var place = document.querySelector("#script-placement");
     place.innerHTML = content;
+    showGameStart();
+}
+
+function showPlayGame() {
+    var source = document.getElementById("showGameSet").innerHTML;
+    var template = Handlebars.compile(source);
+    content = template({
+        setGameMessage: "Set up New Game",
+        ref: `${pageData.username}`,
+        playerOne: "Player 1:",
+        playerTwo: "Player 2:",
+        buttonMessage: "Start Game"
+    });
+    var place = document.querySelector("#script-placement");
+    place.innerHTML = content;
+    showGamePlay();
+}
+
+function showGameStart() {
+    var newGameButton = document.getElementById("startNewGame");
+    newGameButton.addEventListener("click", showPlayGame);
+}
+
+// showPlayGame();
+
+function showScoreGame() {
+    var source = document.getElementById("showScoreGame").innerHTML;
+    var template = Handlebars.compile(source);
+    content = template({
+        setScoreGame: "Score Game",
+        ref: `${pageData.username}`,
+        playerOne: "Player 1 Name",
+        playerOneScore: "Score: 0",
+        scoreButtonText: "+1",
+        playerTwo: "Player 2 Name",
+        playerTwoScore: "Score: 0",
+        scoreButtonText2: "+1"
+    });
+    var place = document.querySelector("#script-placement");
+    place.innerHTML = content;
+}
+
+function showGamePlay() {
+    var newGameButton = document.getElementById("startGame");
+    newGameButton.addEventListener("click", showScoreGame);
 }
