@@ -29,3 +29,15 @@
 .fancy-font {
     font-family: "Righteous", cursive;
 }
+
+body {
+    background-image: url("./img/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    /* min-width: 1024px; */
+}
+
+.other-color {
+    background-color: #808080;
+}

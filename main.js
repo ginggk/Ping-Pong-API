@@ -141,7 +141,9 @@ function showPlayGame() {
     });
     var place = document.querySelector("#script-placement");
     place.innerHTML = content;
+
     showGamePlay();
+    listenForInput();
 }
 
 function showGameStart() {
@@ -155,7 +157,7 @@ function showScoreGame() {
     var source = document.getElementById("showScoreGame").innerHTML;
     var template = Handlebars.compile(source);
     content = template({
-        setScoreGame: "Score Game",
+        setScoreGame: "YOUR SCORE TRACKER",
         ref: `${pageData.username}`,
         playerOne: "Player 1 Name",
         playerOneScore: "Score: 0",
@@ -171,4 +173,22 @@ function showScoreGame() {
 function showGamePlay() {
     var newGameButton = document.getElementById("startGame");
     newGameButton.addEventListener("click", showScoreGame);
+}
+
+function disableButton() {
+    var button = document.getElementById("startGame");
+    var playerOneInput = document.querySelector(".input1").value;
+    var playerTwoInput = document.querySelector(".input2").value;
+    if (playerOneInput !== "" && playerTwoInput !== "") {
+        button.removeAttribute("disabled", "disabled");
+    } else {
+        button.setAttribute("disabled", "disabled");
+    }
+}
+
+function listenForInput() {
+    var firstInput = document.getElementById("firstInput");
+    var secondInput = document.getElementById("secondInput");
+    firstInput.addEventListener("change", disableButton);
+    secondInput.addEventListener("change", disableButton);
 }

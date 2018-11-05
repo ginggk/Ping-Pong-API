@@ -16,7 +16,7 @@
 
 <body>
     <div id="script-placement">
-        <div class="card pt-4  text-center">
+        <div class="card pt-4  text-center other-color">
             <div class="card-header card-color">
                 <h1 class="fancy-font"><i class="fas fa-table-tennis"></i> Welcome to BCCA's Ping Pong Score Keeper <i
                         class="fas fa-table-tennis"></i></h1>
@@ -28,7 +28,7 @@
                     <h1 class="fancy-font">Sign Up</h1>
                 </button>
             </a>
-            <h1>Or</h1>
+            <h1 class="text-white">Or</h1>
             <a id="LoginLink" class="formLink" href="#">
                 <button type="button" class="btn color-button">
                     <h1 class="fancy-font">Log In</h1>
@@ -42,11 +42,11 @@
     <div class="container pt-4">
         <form method="POST">
             <div class="form-group ">
-                <label class="fancy-font">{{username}}</label>
+                <label class="fancy-font text-white">{{username}}</label>
                 <input type="text" class="form-control col-4" id="existingUsername" placeholder="Enter your username">
             </div>
             <div class="form-group ">
-                <label class="fancy-font">{{password}}</label>
+                <label class="fancy-font text-white">{{password}}</label>
                 <input type="password" class="form-control col-4" id="existingPassword" placeholder="Enter your password">
             </div>
             <button id="loginButton" type="submit" class="btn btn-success pt-2 fancy-font">{{buttonMessage}}</button>
@@ -113,16 +113,16 @@
             </div>
             <div class="playerContainer d-flex pt-4 justify-content-center ">
                 <div id="playerOneInput" class="playerSelect pr-2">
-                    <label for="playerOne">{{playerOne}}</label>
-                    <input type="text" class="form-control" id="playerOne" placeholder="Enter Player 1..">
+                    <label class="text-white" for="playerOne">{{playerOne}}</label>
+                    <input id="firstInput" class="input1" type="text" class="form-control" id="playerOne" placeholder="Enter Player 1..">
                 </div>
                 <div id="playerTwoInput" class="playerSelect pb-4">
-                        <label for="playerOne">{{playerTwo}}</label>
-                        <input type="text" class="form-control" id="playerTwo" placeholder="Enter Player 2..">
+                    <label class="text-white" for="playerOne">{{playerTwo}}</label>
+                    <input id="secondInput" class="input2" type="text" class="form-control" id="playerTwo" placeholder="Enter Player 2..">
                 </div>
             </div>
             <div class="buttonContainer">
-                <button id="startGame" type="button" class="btn color-button">
+                <button id="startGame" type="button" class="btn color-button" disabled>
                     <h3 class="fancy-font">{{buttonMessage}}</h3>
                 </button>
             </div>
@@ -142,13 +142,13 @@
             </div>
             <div class="playerContainer d-flex pt-4 justify-content-around">
                 <div id="playerOneScore" class="playerScore">
-                    <h2>{{playerOne}}</h2>
-                    <h3>{{playerOneScore}}</h3>
+                    <h2 class="text-white">{{playerOne}}</h2>
+                    <h3 class="text-white">{{playerOneScore}}</h3>
                     <button type="button" class="btn color-button">{{scoreButtonText}}</button>
                 </div>
                 <div id="playerTwoScore" class="playerScore">
-                    <h2>{{playerTwo}}</h2>
-                    <h3>{{playerTwoScore}}</h3>
+                    <h2 class="text-white">{{playerTwo}}</h2>
+                    <h3 class="text-white">{{playerTwoScore}}</h3>
                     <button type="button" class="btn color-button">{{scoreButtonText2}}</button>
                 </div>
             </div>
