@@ -43,11 +43,11 @@
         <form method="POST">
             <div class="form-group ">
                 <label class="fancy-font text-white">{{username}}</label>
-                <input type="text" class="form-control col-4" id="existingUsername" placeholder="Enter your username">
+                <input type="text" class="form-control col-4" id="existingUsername" placeholder="Enter your username" required>
             </div>
             <div class="form-group ">
                 <label class="fancy-font text-white">{{password}}</label>
-                <input type="password" class="form-control col-4" id="existingPassword" placeholder="Enter your password">
+                <input type="password" class="form-control col-4" id="existingPassword" placeholder="Enter your password" required>
             </div>
             <button id="loginButton" type="submit" class="btn btn-success pt-2 fancy-font">{{buttonMessage}}</button>
         </form>
@@ -114,12 +114,18 @@
             <div class="playerContainer d-flex pt-4 justify-content-center ">
                 <div id="playerOneInput" class="playerSelect pr-2">
                     <label class="text-white" for="playerOne">{{playerOne}}</label>
-                    <input id="firstInput" class="input1" type="text" class="form-control" id="playerOne" placeholder="Enter Player 1..">
+                    <input id="firstInput" class="input1" type="text" class="form-control" placeholder="Enter Player 1.." list="users">
+                    
                 </div>
                 <div id="playerTwoInput" class="playerSelect pb-4">
                     <label class="text-white" for="playerOne">{{playerTwo}}</label>
-                    <input id="secondInput" class="input2" type="text" class="form-control" id="playerTwo" placeholder="Enter Player 2..">
+                    <input id="secondInput" class="input2" type="text" class="form-control" placeholder="Enter Player 2.." list="users">
                 </div>
+                <datalist id="users">
+                    {{#each this.listOfUsers}}
+                    <option>{{this.username}}</option>
+                    {{/each}}
+                </datalist>
             </div>
             <div class="buttonContainer">
                 <button id="startGame" type="button" class="btn color-button" disabled>
@@ -144,12 +150,12 @@
                 <div id="playerOneScore" class="playerScore">
                     <h2 class="text-white">{{playerOne}}</h2>
                     <h3 class="text-white">{{playerOneScore}}</h3>
-                    <button type="button" class="btn color-button">{{scoreButtonText}}</button>
+                    <button id="first-player" type="button" class="btn color-button">{{scoreButtonText}}</button>
                 </div>
                 <div id="playerTwoScore" class="playerScore">
                     <h2 class="text-white">{{playerTwo}}</h2>
                     <h3 class="text-white">{{playerTwoScore}}</h3>
-                    <button type="button" class="btn color-button">{{scoreButtonText2}}</button>
+                    <button id="second-player" type="button" class="btn color-button">{{scoreButtonText2}}</button>
                 </div>
             </div>
         </div>

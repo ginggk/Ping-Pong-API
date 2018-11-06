@@ -1,4 +1,11 @@
-var pageData = {};
+var pageData = {
+    playerOne: "",
+    playerTwo: "",
+    playerOneScore: 0,
+    playerTwoScore: 0,
+    userInfo: []
+    // usernames: []
+};
 
 function listenForSignUp(pageData) {
     var signUpLink = document.querySelector("#SignUpLink");
@@ -72,7 +79,7 @@ function onSignIn(pageData) {
         .then(function(newJson) {
             pageData.username = username;
             pageData.token = newJson.token;
-            getUsers(pageData);
+            getUsers();
             showHome(pageData);
         });
 }
@@ -96,13 +103,13 @@ function onLogin(pageData) {
         .then(function(newJson) {
             pageData.username = username;
             pageData.token = newJson.token;
-            getUsers(pageData);
+            getUsers();
             showHome(pageData);
         });
 }
 
-function getUsers(pageData) {
-    fetch("https://bcca-pingpong.herokuapp.com/api/users/", {
+function getUsers() {
+    return fetch("https://bcca-pingpong.herokuapp.com/api/users/", {
         method: "GET",
         headers: {
             Authorization: `Token ${pageData.token}`
@@ -112,7 +119,7 @@ function getUsers(pageData) {
             return response.json();
         })
         .then(function(newJson) {
-            console.log(newJson);
+            return (pageData.userInfo = newJson);
         });
 }
 
@@ -132,18 +139,22 @@ function showHome(pageData) {
 function showPlayGame() {
     var source = document.getElementById("showGameSet").innerHTML;
     var template = Handlebars.compile(source);
-    content = template({
-        setGameMessage: "Set up New Game",
-        ref: `${pageData.username}`,
-        playerOne: "Player 1:",
-        playerTwo: "Player 2:",
-        buttonMessage: "Start Game"
-    });
-    var place = document.querySelector("#script-placement");
-    place.innerHTML = content;
+    getUsers().then(function() {
+        content = template({
+            setGameMessage: "Set up New Game",
+            ref: `${pageData.username}`,
+            playerOne: "Player One:",
+            playerTwo: "Player Two:",
+            listOfUsers: pageData.userInfo,
+            // secondListOfUsers: `${getList()}`,
+            buttonMessage: "Start Game"
+        });
+        var place = document.querySelector("#script-placement");
+        place.innerHTML = content;
 
-    showGamePlay();
-    listenForInput();
+        showGamePlay();
+        listenForInput();
+    });
 }
 
 function showGameStart() {
@@ -151,28 +162,31 @@ function showGameStart() {
     newGameButton.addEventListener("click", showPlayGame);
 }
 
-// showPlayGame();
-
 function showScoreGame() {
     var source = document.getElementById("showScoreGame").innerHTML;
     var template = Handlebars.compile(source);
     content = template({
         setScoreGame: "YOUR SCORE TRACKER",
         ref: `${pageData.username}`,
-        playerOne: "Player 1 Name",
-        playerOneScore: "Score: 0",
+        playerOne: `${pageData.playerOne}`,
+        playerOneScore: `Score: ${pageData.playerOneScore}`,
         scoreButtonText: "+1",
-        playerTwo: "Player 2 Name",
-        playerTwoScore: "Score: 0",
+        playerTwo: `${pageData.playerTwo}`,
+        playerTwoScore: `Score: ${pageData.playerTwoScore}`,
         scoreButtonText2: "+1"
     });
     var place = document.querySelector("#script-placement");
     place.innerHTML = content;
+    addOne();
 }
 
 function showGamePlay() {
     var newGameButton = document.getElementById("startGame");
-    newGameButton.addEventListener("click", showScoreGame);
+    newGameButton.addEventListener("click", function() {
+        pageData.playerOne = document.getElementById("firstInput").value;
+        pageData.playerTwo = document.getElementById("secondInput").value;
+        showScoreGame();
+    });
 }
 
 function disableButton() {
@@ -191,4 +205,26 @@ function listenForInput() {
     var secondInput = document.getElementById("secondInput");
     firstInput.addEventListener("change", disableButton);
     secondInput.addEventListener("change", disableButton);
+}
+
+function addOne() {
+    var player1Button = document.getElementById("first-player");
+    var player2Button = document.getElementById("second-player");
+    player1Button.addEventListener("click", function() {
+        pageData.playerOneScore += 1;
+        showScoreGame();
+    });
+    player2Button.addEventListener("click", function() {
+        pageData.playerTwoScore += 1;
+        showScoreGame();
+    });
+}
+
+function getList(userList) {
+    var usernames = [];
+    for (var i = 0; i < userList.length; i++) {
+        usernames.push(userList[i].username);
+        // return usernames;
+    }
+    return usernames;
 }
