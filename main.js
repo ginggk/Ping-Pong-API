@@ -3,7 +3,8 @@ var pageData = {
     playerTwo: "",
     playerOneScore: 0,
     playerTwoScore: 0,
-    userInfo: []
+    userInfo: [],
+    token: ""
     // usernames: []
 };
 
@@ -56,6 +57,7 @@ function showLoginPage(pageData) {
         event.preventDefault();
         onLogin(pageData);
     });
+    // listenForPassword();
 }
 
 function onSignIn(pageData) {
@@ -101,10 +103,14 @@ function onLogin(pageData) {
             return response.json();
         })
         .then(function(newJson) {
-            pageData.username = username;
-            pageData.token = newJson.token;
-            getUsers();
-            showHome(pageData);
+            if (newJson.token) {
+                pageData.username = username;
+                pageData.token = newJson.token;
+                var button = document.getElementById("loginButton");
+                getUsers().then(function() {
+                    showHome(pageData);
+                });
+            }
         });
 }
 
@@ -220,11 +226,13 @@ function addOne() {
     });
 }
 
-function getList(userList) {
-    var usernames = [];
-    for (var i = 0; i < userList.length; i++) {
-        usernames.push(userList[i].username);
-        // return usernames;
-    }
-    return usernames;
-}
+// function putPassword() {
+//     getUsers().then(function() {
+//         console.log(pageData.userInfo);
+//     });
+// }
+
+// function listenForPassword() {
+//     var password = document.getElementById("existingPassword");
+//     password.addEventListener("change", putPassword);
+// }
