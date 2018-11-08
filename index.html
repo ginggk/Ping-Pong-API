@@ -38,6 +38,23 @@
     </div>
 
 
+    <script id="endGame" type="text/x-handlebars-template">
+        <div class="container pt-4">
+            <div class="card card-color">
+                <div class="card-header">
+                    <h1 class="text-center fancy-font text-white">{{userWon}}</h1>
+                    <h1 class="text-center fancy-font text-white">{{scores}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container pt-3">
+                <button id="winButton" type="button" class="btn color-button text-white center-button">{{buttonMessage}}</button>
+        </div>
+    </script>
+
+
+
+
     <script id="showLogin" type="text/x-handlebars-template">
     <div class="container pt-4">
         <form method="POST">

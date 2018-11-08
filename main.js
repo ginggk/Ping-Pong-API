@@ -217,22 +217,43 @@ function addOne() {
     var player1Button = document.getElementById("first-player");
     var player2Button = document.getElementById("second-player");
     player1Button.addEventListener("click", function() {
-        pageData.playerOneScore += 1;
-        showScoreGame();
+        if (pageData.playerOneScore < 10) {
+            pageData.playerOneScore += 1;
+            showScoreGame();
+        } else {
+            var source = document.getElementById("endGame").innerHTML;
+            var template = Handlebars.compile(source);
+            var winMessage = document.getElementById("script-placement");
+            winMessage.innerHTML = template({
+                userWon: `${pageData.playerOne} won!`,
+                scores: `${pageData.playerOne} had 10 points.\n${
+                    pageData.playerTwo
+                } had ${pageData.playerTwoScore}`,
+                buttonMessage: "Home"
+            });
+        }
     });
     player2Button.addEventListener("click", function() {
-        pageData.playerTwoScore += 1;
-        showScoreGame();
+        if (pageData.playerTwoScore < 10) {
+            pageData.playerTwoScore += 1;
+            showScoreGame();
+        } else {
+            var source = document.getElementById("endGame").innerHTML;
+            var template = Handlebars.compile(source);
+            var winMessage = document.getElementById("script-placement");
+            winMessage.innerHTML = template({
+                userWon: `${pageData.playerTwo} won!`,
+                scores: `${pageData.playerTwo} had 10 points.\n ${
+                    pageData.playerOne
+                } had ${pageData.playerOneScore}`,
+                buttonMessage: "Home"
+            });
+        }
+        // listenForWin();
     });
 }
 
-// function putPassword() {
-//     getUsers().then(function() {
-//         console.log(pageData.userInfo);
-//     });
-// }
-
-// function listenForPassword() {
-//     var password = document.getElementById("existingPassword");
-//     password.addEventListener("change", putPassword);
-// }
+function listenForWin() {
+    var button = document.getElementById("winButton");
+    button.addEventListener("click", showPlayGame);
+}
