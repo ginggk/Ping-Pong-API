@@ -19,19 +19,24 @@ listenForSignUp(pageData);
 function showSignUpPage(pageData) {
     var source = document.getElementById("showSignUp").innerHTML;
     var template = Handlebars.compile(source);
-    content = template({
-        username: "Username:",
-        password: "Password:",
-        passwordConfirm: "Password Confirmation:",
-        buttonMessage: "Submit"
+    getUsers().then(function() {
+        content = template({
+            username: "Username:",
+            password: "Password:",
+            passwordConfirm: "Password Confirmation:",
+            buttonMessage: "Submit"
+        });
+        var place = document.querySelector("#script-placement");
+        place.innerHTML = content;
+        button = document.querySelector("#signupButton");
+        button.addEventListener("click", function(event) {
+            event.preventDefault();
+            onSignIn(pageData);
+        });
+        listenForConfirmation();
+        // listenForTakenUsername();
     });
-    var place = document.querySelector("#script-placement");
-    place.innerHTML = content;
-    button = document.querySelector("#signupButton");
-    button.addEventListener("click", function(event) {
-        event.preventDefault();
-        onSignIn(pageData);
-    });
+    // listenForConfirmation();
 }
 
 function listenForLogin(pageData) {
@@ -162,6 +167,7 @@ function showPlayGame() {
         listenForInput();
     });
 }
+// showPlayGame();
 
 function showGameStart() {
     var newGameButton = document.getElementById("startNewGame");
@@ -231,6 +237,7 @@ function addOne() {
                 } had ${pageData.playerTwoScore}`,
                 buttonMessage: "Home"
             });
+            listenForWin();
         }
     });
     player2Button.addEventListener("click", function() {
@@ -248,12 +255,39 @@ function addOne() {
                 } had ${pageData.playerOneScore}`,
                 buttonMessage: "Home"
             });
+            listenForWin();
         }
         // listenForWin();
     });
+    // listenForWin();
 }
 
 function listenForWin() {
     var button = document.getElementById("winButton");
     button.addEventListener("click", showPlayGame);
+}
+
+function confirmPassword() {
+    var password = document.getElementById("inputPassword").value;
+    var repeatPassword = document.getElementById("inputPasswordRepeat").value;
+    var passwordRepeat = document.getElementById("inputPasswordRepeat");
+    var button = document.getElementById("signupButton");
+    if (password != repeatPassword) {
+        button.setAttribute("disabled", "disabled");
+        passwordRepeat.classList.remove("valid");
+        passwordRepeat.classList.add("invalid");
+        var pTag = document.getElementById("pTag2");
+        pTag.innerHTML = "That is not the same password as the one above.";
+    } else {
+        button.removeAttribute("disabled", "disabled");
+        passwordRepeat.classList.remove("invalid");
+        passwordRepeat.classList.add("valid");
+        var pTag = document.getElementById("pTag2");
+        pTag.innerHTML = "";
+    }
+}
+
+function listenForConfirmation() {
+    var passwordRepeat = document.getElementById("inputPasswordRepeat");
+    passwordRepeat.addEventListener("change", confirmPassword);
 }

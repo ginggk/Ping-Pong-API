@@ -1,5 +1,9 @@
-.navbar-color {
-    background-color: rgb(211, 108, 117);
+.playerContainer {
+    display: block;
+}
+
+body {
+    background-color: #808080;
 }
 
 .formLink {
@@ -12,10 +16,12 @@
     text-decoration: none;
 }
 
+.navbar-color {
+    background-color: rgb(211, 108, 117);
+}
 .line-break {
     text-align: left;
 }
-
 .card-color {
     background-color: rgb(211, 108, 117);
     color: white;
@@ -30,14 +36,6 @@
     font-family: "Righteous", cursive;
 }
 
-body {
-    background-image: url("./img/background.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100vh;
-    /* min-width: 1024px; */
-}
-
 .other-color {
     background-color: #808080;
 }
@@ -46,6 +44,17 @@ body {
     color: red;
 }
 
-.center-button {
-    margin-left: 33rem;
+.valid {
+    color: green;
+}
+
+@media screen and (min-width: 600px) {
+    .playerContainer {
+        display: flex;
+        justify-content: center;
+    }
+    /* .center-button {
+        display: flex;
+        justify-content: center;
+    } */
 }

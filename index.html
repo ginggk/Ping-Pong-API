@@ -1,195 +1,210 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Ping Pong Score</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.4.2/css/all.css"
+            integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
+            crossorigin="anonymous"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Righteous"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    </head>
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ping Pong Score</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
-        crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-</head>
-
-<body>
-    <div id="script-placement">
-        <div class="card pt-4  text-center other-color">
-            <div class="card-header card-color">
-                <h1 class="fancy-font"><i class="fas fa-table-tennis"></i> Welcome to BCCA's Ping Pong Score Keeper <i
-                        class="fas fa-table-tennis"></i></h1>
-            </div>
-        </div>
-        <div class="formLinkContainer container text-center pt-5">
-            <a id="SignUpLink" class="formLink" href="#">
-                <button type="button" class="btn color-button">
-                    <h1 class="fancy-font">Sign Up</h1>
-                </button>
-            </a>
-            <h1 class="text-white">Or</h1>
-            <a id="LoginLink" class="formLink" href="#">
-                <button type="button" class="btn color-button">
-                    <h1 class="fancy-font">Log In</h1>
-                </button>
-            </a>
-        </div>
-    </div>
-
-
-    <script id="endGame" type="text/x-handlebars-template">
-        <div class="container pt-4">
-            <div class="card card-color">
-                <div class="card-header">
-                    <h1 class="text-center fancy-font text-white">{{userWon}}</h1>
-                    <h1 class="text-center fancy-font text-white">{{scores}}</h1>
-                </div>
-            </div>
-        </div>
-        <div class="container pt-3">
-                <button id="winButton" type="button" class="btn color-button text-white center-button">{{buttonMessage}}</button>
-        </div>
-    </script>
-
-
-
-
-    <script id="showLogin" type="text/x-handlebars-template">
-    <div class="container pt-4">
-        <form method="POST">
-            <div class="form-group ">
-                <label class="fancy-font text-white">{{username}}</label>
-                <input type="text" class="form-control col-4" id="existingUsername" placeholder="Enter your username">
-            </div>
-            <div class="form-group ">
-                <label class="fancy-font text-white">{{password}}</label>
-                <input type="password" class="form-control col-4" id="existingPassword" placeholder="Enter your password">
-            </div>
-            <button id="loginButton" type="button" class="btn btn-success pt-2 fancy-font">{{buttonMessage}}</button>
-        </form>
-    </div>
-    </script>
-
-    <script id="showSignUp" type="text/x-handlebars-template">
-        <div class="container pt-4">
-            <form method="POST">
-                <div class="form-group">
-                    <label class="fancy-font">{{username}}</label>
-                    <input type="text" class="form-control col-4" id="inputUsername" placeholder="Enter a username" required>
-                </div>
-                <div class="form-group">
-                    <label class="fancy-font">{{password}}</label>
-                    <input type="password" class="form-control col-4" id="inputPassword" placeholder="Enter a password" required>
-                </div>
-                <div class="form-group">
-                    <label class="fancy-font">{{passwordConfirm}}</label>
-                    <input type="password" class="form-control col-4" id="inputPasswordRepeat" placeholder="Repeat your password"
-                        required>
-                </div>
-                <button id="signupButton" type="submit" class="btn btn-success pt-2 fancy-font">{{buttonMessage}}</button>
-            </form>
-        </div>
-    </script>
-
-    <script id="showHome" type="text/x-handlebars-template">
-        <div class="container pt-4 pb-4 text-center">
-            <div class="card">
-                <div id="welcomeUser" class="card-header card-color">
+    <body>
+        <div id="script-placement">
+            <div class="card pt-4  text-center other-color">
+                <div class="card-header card-color">
                     <h1 class="fancy-font">
-                        {{welcomeUserMessage}}! <i class="fas fa-child"></i>
+                        <i class="fas fa-table-tennis"></i> Welcome to BCCA's
+                        Ping Pong Score Keeper
+                        <i class="fas fa-table-tennis"></i>
                     </h1>
                 </div>
             </div>
-        </div>
-        <div class="container text-center pb-4">
-            <button id="startNewGame" type="button" class="btn color-button fancy-font">
-                    <h1><i class="fas fa-long-arrow-alt-right"></i> {{buttonMessage}} <i class="fas fa-long-arrow-alt-left"></i></h1>
-            </button>
-        </div>
-        <div class="container">
-            <div class="card">
-                <div class="card-header card-color">
-                    <h1 class="fancy-font text-center">
-                        {{leaderBoardPlacement}}
-                    </h1>
-                </div>
+            <div class="formLinkContainer container text-center pt-5">
+                <a id="SignUpLink" class="formLink" href="#">
+                    <button type="button" class="btn color-button">
+                        <h1 class="fancy-font">Sign Up</h1>
+                    </button>
+                </a>
+                <h1 class="text-white">Or</h1>
+                <a id="LoginLink" class="formLink" href="#">
+                    <button type="button" class="btn color-button">
+                        <h1 class="fancy-font">Log In</h1>
+                    </button>
+                </a>
             </div>
         </div>
-    </script>
 
-    <script id="showGameSet" type="text/x-handlebars-template">
-        <div class="container pt-4 pb-4 text-center">
-            <div class="card">
-                <div class="card-header card-color">
-                    <h1 class="fancy-font text-center">
-                        {{setGameMessage}}<i class="fas fa-child"></i>
-                    </h1>
-                    <h1 class="fancy-font text-center">Ref: {{ref}}</h1>
+        <script id="endGame" type="text/x-handlebars-template">
+            <div class="container pt-4">
+                <div class="card card-color">
+                    <div class="card-header">
+                        <h1 class="text-center fancy-font text-white">{{userWon}}</h1>
+                        <h1 class="text-center fancy-font text-white">{{scores}}</h1>
+                    </div>
                 </div>
             </div>
-            <div class="playerContainer d-flex pt-4 justify-content-center ">
-                <div id="playerOneInput" class="playerSelect pr-2">
-                    <label class="text-white" for="playerOne">{{playerOne}}</label>
-                    <input id="firstInput" class="input1" type="text" class="form-control" placeholder="Enter Player 1.." list="users">
-                    
-                </div>
-                <div id="playerTwoInput" class="playerSelect pb-4">
-                    <label class="text-white" for="playerOne">{{playerTwo}}</label>
-                    <input id="secondInput" class="input2" type="text" class="form-control" placeholder="Enter Player 2.." list="users">
-                </div>
-                <datalist id="users">
-                    {{#each this.listOfUsers}}
-                    <option>{{this.username}}</option>
-                    {{/each}}
-                </datalist>
+            <div class="container pt-3 d-flex justify-content-center">
+                    <button id="winButton" type="button" class="btn color-button text-white center-button d-flex justify-content-center">{{buttonMessage}}</button>
             </div>
-            <div class="buttonContainer">
-                <button id="startGame" type="button" class="btn color-button" disabled>
-                    <h3 class="fancy-font">{{buttonMessage}}</h3>
+        </script>
+
+        <script id="showLogin" type="text/x-handlebars-template">
+            <div class="container pt-4">
+                <form method="POST">
+                    <div class="form-group ">
+                        <label class="fancy-font text-white">{{username}}</label>
+                        <input type="text" class="form-control col-lg-3 col-sm-8" id="existingUsername" placeholder="Enter your username">
+                    </div>
+                    <div class="form-group ">
+                        <label class="fancy-font text-white">{{password}}</label>
+                        <input type="password" class="form-control col-lg-3 col-sm-8" id="existingPassword" placeholder="Enter your password">
+                    </div>
+                    <button id="loginButton" type="button" class="btn btn-success pt-2 fancy-font">{{buttonMessage}}</button>
+                </form>
+            </div>
+        </script>
+
+        <script id="showSignUp" type="text/x-handlebars-template">
+            <div class="container pt-4">
+                <form method="POST">
+                    <div class="form-group">
+                        <label class="fancy-font text-white">{{username}}</label>
+                        <input type="text" class="form-control col-4" id="inputUsername" placeholder="Enter a username" required>
+                        <p id="pTag" class="fancy-font text-white"></p>
+                    </div>
+                    <div class="form-group">
+                        <label class="fancy-font text-white">{{password}}</label>
+                        <input type="password" class="form-control col-4" id="inputPassword" placeholder="Enter a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="fancy-font text-white">{{passwordConfirm}}</label>
+                        <input type="password" class="form-control col-4" id="inputPasswordRepeat" placeholder="Repeat your password"
+                            required>
+                        <p id="pTag2" class="fancy-font text-white"></p>
+                    </div>
+                    <button id="signupButton" type="submit" class="btn btn-success pt-2 fancy-font">{{buttonMessage}}</button>
+                </form>
+            </div>
+        </script>
+
+        <script id="showHome" type="text/x-handlebars-template">
+            <div class="container pt-4 pb-4 text-center">
+                <div class="card">
+                    <div id="welcomeUser" class="card-header card-color">
+                        <h1 class="fancy-font">
+                            {{welcomeUserMessage}}! <i class="fas fa-child"></i>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="container text-center pb-4">
+                <button id="startNewGame" type="button" class="btn color-button fancy-font col-lg-4 col-sm-3">
+                        <h3><i class="fas fa-long-arrow-alt-right"></i> {{buttonMessage}} <i class="fas fa-long-arrow-alt-left"></i></h3>
                 </button>
             </div>
-                
-            </div>
-    </script>
-
-    <script id="showScoreGame" type="text/x-handlebars-template">
-        <div class="container pt-4 pb-4 text-center">
-            <div class="card">
-                <div class="card-header card-color">
-                    <h1 class="fancy-font text-center">
-                        {{setScoreGame}}
-                    </h1>
-                    <h1 class="fancy-font text-center">Ref: {{ref}}</h1>
+            <div class="container">
+                <div class="card">
+                    <div class="card-header card-color">
+                        <h1 class="fancy-font text-center">
+                            {{leaderBoardPlacement}}
+                        </h1>
+                    </div>
                 </div>
             </div>
-            <div class="playerContainer d-flex pt-4 justify-content-around">
-                <div id="playerOneScore" class="playerScore">
-                    <h2 class="text-white">{{playerOne}}</h2>
-                    <h3 class="text-white">{{playerOneScore}}</h3>
-                    <button id="first-player" type="button" class="btn color-button">{{scoreButtonText}}</button>
+        </script>
+
+        <script id="showGameSet" type="text/x-handlebars-template">
+            <div class="container pt-4 pb-4 text-center">
+                <div class="card">
+                    <div class="card-header card-color">
+                        <h1 class="fancy-font text-center">
+                            {{setGameMessage}}<i class="fas fa-child"></i>
+                        </h1>
+                        <h1 class="fancy-font text-center">Ref: {{ref}}</h1>
+                    </div>
                 </div>
-                <div id="playerTwoScore" class="playerScore">
-                    <h2 class="text-white">{{playerTwo}}</h2>
-                    <h3 class="text-white">{{playerTwoScore}}</h3>
-                    <button id="second-player" type="button" class="btn color-button">{{scoreButtonText2}}</button>
+                <div class="playerContainer pt-4 ">
+                    <div id="playerOneInput" class="playerSelect pr-2">
+                        <label class="text-white input-size" for="playerOne">{{playerOne}}</label>
+                        <input id="firstInput" class="input1" type="text" class="form-control" placeholder="Enter Player 1.." list="users">
+
+                    </div>
+                    <div id="playerTwoInput" class="playerSelect pb-4">
+                        <label class="text-white" for="playerOne">{{playerTwo}}</label>
+                        <input id="secondInput" class="input2 input-size" type="text" class="form-control" placeholder="Enter Player 2.." list="users">
+                    </div>
+                    <datalist id="users">
+                        {{#each this.listOfUsers}}
+                        <option>{{this.username}}</option>
+                        {{/each}}
+                    </datalist>
+                </div>
+                <div class="buttonContainer">
+                    <button id="startGame" type="button" class="btn color-button" disabled>
+                        <h3 class="fancy-font">{{buttonMessage}}</h3>
+                    </button>
+                </div>
+
+                </div>
+        </script>
+
+        <script id="showScoreGame" type="text/x-handlebars-template">
+            <div class="container pt-4 pb-4 text-center">
+                <div class="card">
+                    <div class="card-header card-color">
+                        <h1 class="fancy-font text-center">
+                            {{setScoreGame}}
+                        </h1>
+                        <h1 class="fancy-font text-center">Ref: {{ref}}</h1>
+                    </div>
+                </div>
+                <div class="playerContainer d-flex pt-4 justify-content-around">
+                    <div id="playerOneScore" class="playerScore">
+                        <h2 class="text-white">{{playerOne}}</h2>
+                        <h3 class="text-white">{{playerOneScore}}</h3>
+                        <button id="first-player" type="button" class="btn color-button">{{scoreButtonText}}</button>
+                    </div>
+                    <div id="playerTwoScore" class="playerScore">
+                        <h2 class="text-white">{{playerTwo}}</h2>
+                        <h3 class="text-white">{{playerTwoScore}}</h3>
+                        <button id="second-player" type="button" class="btn color-button">{{scoreButtonText2}}</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </script>
+        </script>
 
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-    <script src="main.js"></script>
-
-</body>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"
+        ></script>
+        <script src="main.js"></script>
+    </body>
 </html>
